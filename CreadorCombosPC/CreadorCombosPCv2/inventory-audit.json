@@ -1,0 +1,23 @@
+{
+  "filteredProducts": 730,
+  "categoryCounts": {
+    "cpu": 23,
+    "motherboard": 26,
+    "ram": 30,
+    "storage": 27,
+    "gpu": 17,
+    "case": 42,
+    "psu": 36,
+    "cooling": 23,
+    "monitor": 47,
+    "keyboard": 64,
+    "mouse": 79,
+    "headset": 89,
+    "accessory": 227
+  },
+  "skippedCounts": {
+    "sin_stock_o_precio": 2056,
+    "fuera_de_pc": 1762,
+    "repuesto_no_configurable": 1
+  }
+}

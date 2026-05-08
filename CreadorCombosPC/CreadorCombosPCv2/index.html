@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Creador de Combos PC</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand-lockup">
+        <div class="brand-mark" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div>
+          <p class="eyebrow">Inventario validado</p>
+          <h1>Creador de combos de PC</h1>
+          <p class="header-subtitle">Compatibilidad filtrada por socket, DDR, gabinete y fuente.</p>
+        </div>
+      </div>
+      <div class="top-actions">
+        <button class="icon-button" id="themeToggle" type="button" title="Cambiar tema" aria-label="Cambiar tema">
+          <span class="icon-sun" aria-hidden="true"></span>
+        </button>
+        <button class="utility-button" id="resetBuilder" type="button">Limpiar</button>
+      </div>
+    </header>
+
+    <section class="command-strip" aria-label="Resumen del inventario">
+      <div class="metric">
+        <span class="metric-label">Productos PC</span>
+        <strong id="catalogCount">0</strong>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Componentes base</span>
+        <strong id="coreCount">0</strong>
+      </div>
+      <div class="metric">
+        <span class="metric-label">Estado del combo</span>
+        <strong id="buildStatus">Sin iniciar</strong>
+      </div>
+      <div class="metric metric-wide">
+        <span class="metric-label">Fuente</span>
+        <strong id="sourceLabel">Inventario actual</strong>
+      </div>
+    </section>
+
+    <main class="workspace">
+      <aside class="left-panel" aria-label="Categorías y presets">
+        <div class="panel-heading">
+          <p class="eyebrow">Pasos</p>
+          <h2>Componentes</h2>
+        </div>
+        <nav class="category-rail" id="categoryRail" aria-label="Categorías de productos"></nav>
+
+        <section class="preset-panel">
+          <div class="panel-heading">
+            <p class="eyebrow">Armado rápido</p>
+            <h2>Presets</h2>
+          </div>
+          <div class="preset-list">
+            <button type="button" class="preset-button" data-preset="office">
+              <span>Oficina completa</span>
+              <small>Productividad, video integrado y periféricos</small>
+            </button>
+            <button type="button" class="preset-button" data-preset="gaming">
+              <span>Gaming 1080p</span>
+              <small>AM5, RTX, NVMe y monitor rápido</small>
+            </button>
+            <button type="button" class="preset-button" data-preset="creator">
+              <span>Creator / Pro</span>
+              <small>CPU alto rendimiento, GPU fuerte y 2TB</small>
+            </button>
+          </div>
+        </section>
+      </aside>
+
+      <section class="catalog-panel" aria-label="Catálogo de productos">
+        <section class="build-overview" id="buildOverview" aria-label="Resumen visual del armado"></section>
+
+        <div class="catalog-header">
+          <div>
+            <p class="eyebrow" id="activeCategoryMeta">Catálogo</p>
+            <h2 id="activeCategoryTitle">Productos</h2>
+          </div>
+          <div class="category-progress" id="categoryProgress" aria-live="polite"></div>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-field">
+            <span aria-hidden="true"></span>
+            <input id="searchInput" type="search" autocomplete="off" placeholder="Buscar por producto, código, marca o especificación">
+          </label>
+          <label class="select-field">
+            <span>Marca</span>
+            <select id="brandFilter"></select>
+          </label>
+          <label class="select-field">
+            <span>Orden</span>
+            <select id="sortFilter">
+              <option value="recommended">Recomendado</option>
+              <option value="priceAsc">Precio menor</option>
+              <option value="priceDesc">Precio mayor</option>
+              <option value="stockDesc">Más stock</option>
+              <option value="nameAsc">Nombre A-Z</option>
+            </select>
+          </label>
+          <div class="locked-compatibility" title="El catálogo oculta automáticamente piezas no compatibles con la selección actual.">
+            Compatibles verificados
+          </div>
+        </div>
+
+        <div class="insight-bar" id="insightBar"></div>
+        <div class="product-grid" id="productGrid" aria-live="polite"></div>
+      </section>
+
+      <aside class="quote-panel" aria-label="Cotización y validación">
+        <div class="quote-header">
+          <div>
+            <p class="eyebrow">Cotización</p>
+            <h2 id="quoteId">PC-0000</h2>
+          </div>
+          <div class="health-pill" id="healthPill">Pendiente</div>
+        </div>
+
+        <section class="quote-section">
+          <h3>Cliente</h3>
+          <div class="form-grid">
+            <label>
+              <span>Nombre</span>
+              <input id="clientName" type="text" autocomplete="name" placeholder="Cliente o empresa">
+            </label>
+            <label>
+              <span>Contacto</span>
+              <input id="clientContact" type="text" autocomplete="tel" placeholder="Teléfono / WhatsApp">
+            </label>
+          </div>
+          <label>
+            <span>Correo</span>
+            <input id="clientEmail" type="email" autocomplete="email" placeholder="correo@dominio.com">
+          </label>
+        </section>
+
+        <section class="quote-section">
+          <div class="section-row">
+            <h3>Selección</h3>
+            <button type="button" class="text-button" id="copySummary">Copiar resumen</button>
+          </div>
+          <div class="selection-list" id="selectionList"></div>
+        </section>
+
+        <section class="quote-section">
+          <h3>Validación</h3>
+          <div class="diagnostic-list" id="diagnosticList"></div>
+        </section>
+
+        <section class="quote-section totals-section">
+          <div class="pricing-controls client-controls">
+            <label>
+              <span>Días validez</span>
+              <input id="validDays" type="number" min="1" max="30" step="1" value="7">
+            </label>
+          </div>
+          <textarea id="quoteNotes" rows="3" placeholder="Notas para la cotización"></textarea>
+          <div class="total-box" id="totalBox"></div>
+        </section>
+
+        <div class="quote-actions">
+          <button type="button" class="whatsapp-button" id="sendWhatsapp">Enviar por WhatsApp</button>
+          <button type="button" class="primary-button" id="downloadQuote">Descargar cotización</button>
+          <button type="button" class="secondary-button" id="printQuote">Imprimir / PDF</button>
+          <button type="button" class="secondary-button" id="downloadCsv">CSV</button>
+        </div>
+      </aside>
+    </main>
+  </div>
+
+  <dialog id="productDialog" class="product-dialog">
+    <button class="dialog-close" type="button" id="closeDialog" aria-label="Cerrar">×</button>
+    <div id="dialogBody"></div>
+  </dialog>
+
+  <script src="products-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
